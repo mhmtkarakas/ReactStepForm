@@ -70,7 +70,7 @@ const Confirm = ({ values, prevStep, nextStep }) => {
               variant="contained"
               onClick={continueHandler}
             >
-              Continue
+              Confirm&Continue
             </Button>
             </Box>
             <Button color="primary" variant="outlined" onClick={backHandler}>
