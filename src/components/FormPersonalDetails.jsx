@@ -31,7 +31,7 @@ const FormPersonalDetails = ({ nextStep, values, handeleChange, prevStep }) => {
           <TextField
             placeholder="Enter Your Occupation"
             label="Occupation"
-            onChange={handeleChange("occuupation")}
+            onChange={handeleChange("occupation")}
             value={values.occupation}
             margin="normal"
             fullWidth
