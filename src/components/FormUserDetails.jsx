@@ -4,6 +4,7 @@ import AppBar from "@mui/material/AppBar";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
+import Box from '@mui/material/Box';
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -16,7 +17,7 @@ const FormUserDetails = ({ nextStep, values, handeleChange }) => {
   };
   return (
     <ThemeProvider theme={theme}>
-      <Dialog open fullWidth maxWidth="sm">
+      <Dialog open fullWidth maxWidth="md">
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6">
@@ -24,6 +25,7 @@ const FormUserDetails = ({ nextStep, values, handeleChange }) => {
             </Typography>
           </Toolbar>
         </AppBar>
+        <Box padding={3}>
         <TextField
         placeholder="Enter Your First Name"
         label="First Name"
@@ -43,10 +45,20 @@ const FormUserDetails = ({ nextStep, values, handeleChange }) => {
         <TextField
         placeholder="Enter Your Email"
         label="Email"
-        onChange= {handeleChange('Email')}
+        onChange= {handeleChange('email')}
         value={values.email}
         margin="normal"
         fullWidth />
+        <br/>
+        <Box mt={2}>
+        <Button
+        color="primary"
+        variant="contained"
+        onClick={continueHandler}>
+          Continue
+        </Button>
+        </Box>
+        </Box>
       </Dialog>
     </ThemeProvider>
   );
