@@ -10,7 +10,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme();
 
-const FormPersonalDetails = ({ nextStep, values, handeleChange, prevStep }) => {
+const FormPersonalDetails = ({ nextStep, values, handleChange, prevStep,errors }) => {
   const continueHandler = (e) => {
     e.preventDefault();
     nextStep();
@@ -31,8 +31,10 @@ const FormPersonalDetails = ({ nextStep, values, handeleChange, prevStep }) => {
           <TextField
             placeholder="Enter Your Occupation"
             label="Occupation"
-            onChange={handeleChange("occupation")}
+            onChange={handleChange("occupation")}
             value={values.occupation}
+            error={Boolean(errors.occupation)}
+            helperText={errors.occupation}
             margin="normal"
             fullWidth
           />
@@ -40,8 +42,10 @@ const FormPersonalDetails = ({ nextStep, values, handeleChange, prevStep }) => {
           <TextField
             placeholder="Enter Your City"
             label="City"
-            onChange={handeleChange("city")}
+            onChange={handleChange("city")}
             value={values.city}
+            error={Boolean(errors.city)}
+            helperText={errors.city}
             margin="normal"
             fullWidth
           />
@@ -49,8 +53,10 @@ const FormPersonalDetails = ({ nextStep, values, handeleChange, prevStep }) => {
           <TextField
             placeholder="Enter Your Bio"
             label="Bio"
-            onChange={handeleChange("bio")}
+            onChange={handleChange("bio")}
             value={values.bio}
+            error={Boolean(errors.bio)}
+            helperText={errors.bio}
             margin="normal"
             fullWidth
           />

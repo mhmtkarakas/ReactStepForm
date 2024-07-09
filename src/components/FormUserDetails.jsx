@@ -10,12 +10,12 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme();
 
-const FormUserDetails = ({ nextStep, values, handeleChange,error }) => {
-  console.log(error);
+const FormUserDetails = ({ nextStep, values, handleChange, errors }) => {
   const continueHandler = (e) => {
     e.preventDefault();
     nextStep();
   };
+
   return (
     <ThemeProvider theme={theme}>
       <Dialog open fullWidth maxWidth="md">
@@ -28,22 +28,21 @@ const FormUserDetails = ({ nextStep, values, handeleChange,error }) => {
           <TextField
             placeholder="Enter Your First Name"
             label="First Name"
-            onChange={handeleChange("firstName")}
+            onChange={handleChange("firstName")}
             value={values.firstName}
-            error={Boolean(error.firstName)}
-            helperText={error.firstName}
+            error={Boolean(errors.firstName)}
+            helperText={errors.firstName}
             margin="normal"
             fullWidth
-
           />
           <br />
           <TextField
             placeholder="Enter Your Last Name"
             label="Last Name"
-            onChange={handeleChange("lastName")}
+            onChange={handleChange("lastName")}
             value={values.lastName}
-            error={Boolean(error.lastName)}
-            helperText={error.lastName}
+            error={Boolean(errors.lastName)}
+            helperText={errors.lastName}
             margin="normal"
             fullWidth
           />
@@ -51,10 +50,10 @@ const FormUserDetails = ({ nextStep, values, handeleChange,error }) => {
           <TextField
             placeholder="Enter Your Email"
             label="Email"
-            onChange={handeleChange("email")}
+            onChange={handleChange("email")}
             value={values.email}
-            error={Boolean(error.email)}
-            helperText={error.email}
+            error={Boolean(errors.email)}
+            helperText={errors.email}
             margin="normal"
             fullWidth
           />

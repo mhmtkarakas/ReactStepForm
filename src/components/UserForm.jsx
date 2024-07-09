@@ -6,7 +6,7 @@ import Success from "./Success";
 
 const UserForm = () => {
   const [step, setStep] = useState(1);
-  const [error, setError] = useState({});
+  const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -15,46 +15,53 @@ const UserForm = () => {
     city: "",
     bio: "",
   });
+
   // Proceed to next Step
   const nextStep = () => {
-    const tempErrors = validate();
+    const tempErrors = validate(step);
     if (Object.keys(tempErrors).length === 0) {
       setStep((prevStep) => prevStep + 1);
+      setErrors({});
     } else {
-      setError(tempErrors);
+      setErrors(tempErrors);
     }
   };
+
   // Go back to previous Step
   const prevStep = () => {
     setStep((prevStep) => prevStep - 1);
   };
+
   const handleChange = (input) => (e) => {
     setFormData({ ...formData, [input]: e.target.value });
-    setError({ ...error, [input]: "" });
+    setErrors({ ...errors, [input]: "" }); // Clear error on change
   };
 
-  // validate form fields
-  const validate = () => {
-    let tempErrorsName = {};
-    if (!formData.firstName) {
-      tempErrorsName.firstName = "This field is required";
+  // Validate form fields based on the current step
+  const validate = (step) => {
+    let tempErrors = {};
+    if (step === 1) {
+      if (!formData.firstName) {
+        tempErrors.firstName = "This field is required";
+      }
+      if (!formData.lastName) {
+        tempErrors.lastName = "This field is required";
+      }
+      if (!formData.email) {
+        tempErrors.email = "This field is required";
+      }
+    } else if (step === 2) {
+      if (!formData.occupation) {
+        tempErrors.occupation = "This field is required";
+      }
+      if (!formData.city) {
+        tempErrors.city = "This field is required";
+      }
+      if (!formData.bio) {
+        tempErrors.bio = "This field is required";
+      }
     }
-    if (!formData.lastName) {
-      tempErrorsName.lastName = "This field is required";
-    }
-    if (!formData.email) {
-      tempErrorsName.email = "This field is required";
-    }
-    if (!formData.occupation) {
-      tempErrorsName.occupation = "This field is required";
-    }
-    if (!formData.city) {
-      tempErrorsName.city = "This field is required";
-    }
-    if (!formData.bio) {
-      tempErrorsName.bio = "This field is required";
-    }
-    return tempErrorsName;
+    return tempErrors;
   };
 
   const { firstName, lastName, email, occupation, city, bio } = formData;
@@ -66,8 +73,8 @@ const UserForm = () => {
         <FormUserDetails
           nextStep={nextStep}
           values={values}
-          handeleChange={handleChange}
-          error={error}
+          handleChange={handleChange}
+          errors={errors}
         />
       );
     case 2:
@@ -76,23 +83,18 @@ const UserForm = () => {
           nextStep={nextStep}
           prevStep={prevStep}
           values={values}
-          handeleChange={handleChange}
-          error={error}
+          handleChange={handleChange}
+          errors={errors}
         />
       );
     case 3:
       return (
-        <Confirm
-          nextStep={nextStep}
-          prevStep={prevStep}
-          values={values}
-          handeleChange={handleChange}
-          error={error}
-        />
+        <Confirm nextStep={nextStep} prevStep={prevStep} values={values} />
       );
     case 4:
       return <Success prevStep={prevStep} />;
     default:
+      return null;
   }
 };
 
